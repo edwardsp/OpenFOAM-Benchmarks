@@ -1,0 +1,80 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions [ 0 0 -1 0 0 0 0 ];
+internalField uniform 9000;
+
+boundaryField
+{
+    ffminx
+    {
+        type fixedValue;
+        value uniform 9000;
+    }
+
+    ffmaxx
+    {
+        type zeroGradient;
+    }
+
+    ffminy
+    {
+        type symmetry;
+    }
+
+    ffmaxy
+    {
+        //type omegaWallFunction;
+        //value uniform 1;
+        type slip;
+    }
+
+    ffminz
+    {
+        type omegaWallFunction;
+        //value uniform 9000;
+        value uniform 500000;
+    }
+
+    ffmaxz
+    {
+        //type omegaWallFunction;
+        //value uniform 1;
+        type slip;
+    }
+
+    body2
+    {
+        type omegaWallFunction;
+        //value uniform 9000;
+        value uniform 500000;
+    }
+
+    ruotaant
+    {
+        type omegaWallFunction;
+        //value uniform 9000;
+        value uniform 500000;
+    }
+
+    ruotapost
+    {
+        type omegaWallFunction;
+        //value uniform 9000;
+        value uniform 500000;
+    }
+
+}

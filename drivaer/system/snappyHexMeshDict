@@ -1,0 +1,252 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      snappyHexMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    castellatedMesh true;
+    snap true;
+    addLayers true;
+    geometry
+    {
+        body2.stl
+        {
+            type triSurfaceMesh;
+            name body2;
+            appendRegionName false;
+        }
+
+        ruotaant.stl
+        {
+            type triSurfaceMesh;
+            name ruotaant;
+            appendRegionName false;
+        }
+
+        ruotapost.stl
+        {
+            type triSurfaceMesh;
+            name ruotapost;
+            appendRegionName false;
+        }
+
+        vr1
+        {
+            type searchableBox;
+            min ( -7.5 0.0 0.0 );
+            max ( 25.0 3.0 4.0 );
+        }
+
+        vr2
+        {
+            type searchableBox;
+            min ( -3.0 0.0 0.0 );
+            max ( 15.0 2.0 3.0 );
+        }
+
+        vr3
+        {
+            type searchableBox;
+            min ( 2.5 0.0 0.0 );
+            max ( 6.5 1.5 1.7 );
+        }
+
+        vr4
+        {
+            type searchableBox;
+            min ( 3.2 0.0 0.0 );
+            max ( 5.2 1.0 1.3 );
+        }
+
+    }
+
+    castellatedMeshControls
+    {
+        features
+        (
+        
+        {
+            file "ruotaant.eMesh";
+            //file "ruotaant_line.eMesh";
+            levels ((0.025 5));
+            refineFeatureEdgesOnly false;
+        }
+
+        
+        {
+            file "ruotapost.eMesh";
+            //file "ruotapost_line.eMesh";
+            levels ((0.025 5));
+            refineFeatureEdgesOnly false;
+        }
+
+        );
+        refinementSurfaces
+        {
+            body2
+            {
+                level ( 4 4 );
+            }
+
+            ruotaant
+            {
+                level ( 4 4 );
+            }
+
+            ruotapost
+            {
+                level ( 4 4 );
+            }
+
+        }
+
+        refinementRegions
+        {
+            vr1
+            {
+                mode inside;
+                levels (( 1E5 1 ));
+            }
+
+            vr2
+            {
+                mode inside;
+                levels (( 1E5 2 ));
+            }
+
+            vr3
+            {
+                mode inside;
+                levels (( 1E5 3 ));
+            }
+
+            vr4
+            {
+                mode inside;
+                levels (( 1E5 4 ));
+            }
+
+        }
+
+        locationInMesh (10.0 1.0 1.0 );
+        maxLocalCells 500000;
+        maxGlobalCells 10000000;
+        minRefinementCells 0;
+        nCellsBetweenLevels 5;
+        resolveFeatureAngle 30.0;
+        allowFreeStandingZoneFaces true;
+        planarAngle 30.0;
+        maxLoadUnbalance 0.1;
+    }
+
+    snapControls
+    {
+        nSolveIter 30;
+        nSmoothPatch 3;
+        tolerance 2.0;
+        nRelaxIter 5;
+        nFeatureSnapIter 10;
+        implicitFeatureSnap false;
+        explicitFeatureSnap true;
+        multiRegionFeatureSnap false;
+    }
+
+    addLayersControls
+    {
+        layers
+        {
+            body2
+            {
+                nSurfaceLayers 3;
+                expansionRatio 1.5;
+                finalLayerThickness 0.3;
+                minThickness 0.1;
+            }
+
+            ruotaant
+            {
+                nSurfaceLayers 3;
+                expansionRatio 1.5;
+                finalLayerThickness 0.3;
+                minThickness 0.1;
+            }
+
+            ruotapost
+            {
+                nSurfaceLayers 3;
+                expansionRatio 1.5;
+                finalLayerThickness 0.3;
+                minThickness 0.1;
+            }
+
+            ffminz
+            {
+                nSurfaceLayers 3;
+                expansionRatio 1.5;
+                finalLayerThickness 0.3;
+                minThickness 0.1;
+            }
+
+        }
+
+        relativeSizes true;
+        expansionRatio 1.2;	//1.0;
+        finalLayerThickness 0.3;
+        minThickness 0.1;	//0.25;
+        nGrow 0;
+        featureAngle 130.0;
+        slipFeatureAngle 30.0;
+        nRelaxIter 5;
+        nSmoothSurfaceNormals 1;
+        nSmoothNormals 3;
+        nSmoothThickness 10;
+        maxFaceThicknessRatio 0.5;
+        maxThicknessToMedialRatio 0.3;
+        minMedialAxisAngle 90;
+        nBufferCellsNoExtrude 0;
+        nLayerIter 50;
+        nRelaxedIter 20;
+        writeVTK false;
+        noErrors false;
+        layerRecovery 1;
+        growZoneLayers false;
+        projectGrownUp 0.0;
+    }
+
+    meshQualityControls
+    {
+        maxNonOrtho 70;		//65.0;
+        maxBoundarySkewness 20;
+        maxInternalSkewness 4;
+        maxConcave 80.0;
+        minFlatness 0.5;
+        minVol 1.0E-13;
+        minTetQuality -1.0E30;
+        minArea -1.0;
+        minTwist 0.02;
+        minDeterminant 0.001;
+        minFaceWeight 0.02;
+        minVolRatio 0.01;
+        minTriangleTwist -1.0;
+        nSmoothScale 4;
+        errorReduction 0.75;
+        relaxed
+        {
+            maxNonOrtho 75;
+        }
+
+    }
+
+    debug 0;
+    mergeTolerance 1.0E-6;
+    autoBlockMesh false;
