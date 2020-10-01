@@ -1,0 +1,169 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+    startFrom startTime;
+    startTime 0;
+    stopAt endTime;
+    endTime 5000.0;
+    deltaT 1.0;
+    writeControl timeStep;
+    writeInterval 250.0;
+    purgeWrite 2;
+    writeFormat ascii;
+    writePrecision 10;
+    writeCompression off;
+    timeFormat general;
+    timePrecision 6;
+    graphFormat raw;
+    runTimeModifiable true;
+
+
+    functions
+    {
+        ruotapost
+        {
+            log no;
+	    enabled yes;
+
+            type forceCoeffs;
+            functionObjectLibs ( "libforces.so");
+
+            patches ( ruotapost);
+
+            rho rhoInf;
+            rhoInf 1.205;
+
+            CofR ( 0 0 0);
+            liftDir ( 0 0 1);
+            dragDir ( 1 0 0);
+            pitchAxis ( 0 1 0);
+            magUInf 30;
+            lRef 1;
+            Aref 1;
+            writeControl timeStep;
+            writeInterval 1;
+        }
+
+        body2
+        {
+            log no;
+	    enabled yes;
+
+            type forceCoeffs;
+            functionObjectLibs ( "libforces.so");
+
+            patches ( body2);
+
+            rho rhoInf;
+            rhoInf 1.205;
+
+            porosity no;
+            CofR ( 0 0 0);
+            liftDir ( 0 0 1);
+            dragDir ( 1 0 0);
+            pitchAxis ( 0 1 0);
+            magUInf 30;
+            lRef 1;
+            Aref 1;
+            writeControl timeStep;
+            writeInterval 1;
+        }
+
+        ruotaant
+        {
+            log no;
+	    enabled yes;
+
+            type forceCoeffs;
+            functionObjectLibs ( "libforces.so");
+
+            patches ( ruotaant);
+
+            rho rhoInf;
+            rhoInf 1.205;
+
+            CofR ( 0 0 0);
+            liftDir ( 0 0 1);
+            dragDir ( 1 0 0);
+            pitchAxis ( 0 1 0);
+            magUInf 30;
+            lRef 1;
+            Aref 1;
+            writeControl timeStep;
+            writeInterval 1;
+        }
+
+        all
+        {
+            log yes;
+	    enabled yes;
+
+            type forceCoeffs;
+            functionObjectLibs ( "libforces.so");
+
+            patches ( "ruotaant" "ruotapost" "body2");
+
+            rho rhoInf;
+            rhoInf 1.205;
+
+            CofR ( 0 0 0);
+            liftDir ( 0 0 1);
+            dragDir ( 1 0 0);
+            pitchAxis ( 0 1 0);
+            magUInf 30;
+            lRef 1;
+            Aref 1.073476;	//projected area in x	//1.08;
+            writeControl timeStep;
+            writeInterval 1;
+        }
+
+///////////////////////////////////////////////////////////////////////////
+yplus
+{
+    type                yPlus;
+    functionObjectLibs ("libfieldFunctionObjects.so");
+
+    enabled true;
+
+    writeControl outputTime;
+    //writeControl timeStep;
+    //writeInterval 1;
+
+    //log true;
+}
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+
+domainminandmax
+{
+    type fieldMinMax;
+    functionObjectLibs ("libfieldFunctionObjects.so");
+
+    enabled true;
+
+    mode component;
+
+    writeControl timeStep;
+    writeInterval 1;
+
+    log true;
+
+    fields (p U k omega nut);
+}
+///////////////////////////////////////////////////////////////////////////
+
+    }

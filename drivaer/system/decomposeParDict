@@ -14,6 +14,8 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-    numberOfSubdomains 4;
+    #include "../paramDict"
+
+    numberOfSubdomains $nProcs;
     method scotch;
 

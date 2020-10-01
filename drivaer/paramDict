@@ -1,0 +1,4 @@
+
+
+nProcs 16;
+blockMeshCells (220 20 32);
