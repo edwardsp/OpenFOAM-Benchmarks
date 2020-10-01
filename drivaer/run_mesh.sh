@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source set_environment.sh
-
 foamCleanTutorials
 rm -rf 0 > /dev/null 2>&1
 

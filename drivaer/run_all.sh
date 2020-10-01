@@ -4,4 +4,3 @@
 ./run_decompose.sh
 ./run_presolver.sh
 ./run_solver.sh
-
