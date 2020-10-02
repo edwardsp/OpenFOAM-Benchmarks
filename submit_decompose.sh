@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $PBS_O_WORKDIR
+
 CASE_NAME="$1"
 NODES="$2"
 PPN="$3"

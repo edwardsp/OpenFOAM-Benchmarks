@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $PBS_O_WORKDIR
+
 CASE_NAME="$1"
 BLOCKMESH_DIMENSIONS="$2"
 
@@ -10,7 +12,7 @@ CORES=$(cat $PBS_NODEFILE | wc -l)
 PPN=$(cat $PBS_NODEFILE | uniq -c | head -1 | awk '{ print $1 }')
 NODES=$(sort -u < $PBS_NODEFILE | wc -l)
 
-rsync -av $(pwd) drivaer/. $CASE_NAME
+rsync -av drivaer/. $CASE_NAME
 cd $CASE_NAME
 
 foamDictionary paramDict -entry nProcs -set $CORES
