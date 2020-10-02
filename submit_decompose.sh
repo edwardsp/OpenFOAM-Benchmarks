@@ -9,7 +9,7 @@ PPN="$3"
 # set paths for OpenFOAM and environment
 source $HOME/OpenFOAM/setenv.sh
 
-rsync -av --exclude constant $CASE_NAME/. ${CASE_NAME}_${RANKS}
+rsync -av --exclude constant $CASE_NAME/. ${CASE_NAME}_${NODES}x${PPN}
 
 cd ${CASE_NAME}_${NODES}x${PPN}
 ln -s ../${CASE_NAME}/constant
