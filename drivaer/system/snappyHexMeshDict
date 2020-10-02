@@ -139,8 +139,8 @@ FoamFile
         }
 
         locationInMesh (10.0 1.0 1.0 );
-        maxLocalCells 500000;
-        maxGlobalCells 10000000;
+        maxLocalCells 5000000;
+        maxGlobalCells 200000000;
         minRefinementCells 0;
         nCellsBetweenLevels 5;
         resolveFeatureAngle 30.0;
