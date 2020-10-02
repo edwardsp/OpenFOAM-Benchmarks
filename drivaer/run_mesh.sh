@@ -3,7 +3,7 @@
 foamCleanTutorials
 rm -rf 0 > /dev/null 2>&1
 
-surfaceFeatureExtract 2>&1 | tee log.surfaceFeatureExtract
+surfaceFeatures 2>&1 | tee log.surfaceFeatureExtract
 blockMesh 2>&1 | tee log.blockMesh
 
 decomposePar

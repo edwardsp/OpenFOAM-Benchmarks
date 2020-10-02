@@ -14,38 +14,30 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-ruotaant.stl
+ruotaant
 {
-    extractionMethod    extractFromSurface;
+    surfaces
+    (
+        "ruotaant.stl"
+    );
 
-    extractFromSurfaceCoeffs
-    {
-        includedAngle   150;
-    }
-
-    subsetFeatures
-    {
-        nonManifoldEdges       yes;
-        openEdges       yes;
-    }
-        writeObj                yes;
+    includedAngle           150;
+    geometricTestOnly       yes;
+    writeObj                yes;
+    verboseObj              yes;
 }
 
-ruotapost.stl
+ruotapost
 {
-    extractionMethod    extractFromSurface;
+    surfaces
+    (
+        "ruotapost.stl"
+    );
 
-    extractFromSurfaceCoeffs
-    {
-        includedAngle   150;
-    }
-
-    subsetFeatures
-    {
-        nonManifoldEdges       yes;
-        openEdges       yes;
-    }
-        writeObj                yes;
+    includedAngle           150;
+    geometricTestOnly       yes;
+    writeObj                yes;
+    verboseObj              yes;
 }
 
 // ************************************************************************* //
