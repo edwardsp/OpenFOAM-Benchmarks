@@ -119,7 +119,7 @@ potentialFlow
 
 SIMPLE
 {
-    nNonOrthogonalCorrectors 2;
+    nNonOrthogonalCorrectors 0;
     pRefCell        0;
     pRefValue       0;
 
