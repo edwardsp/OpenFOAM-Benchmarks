@@ -9,7 +9,7 @@ cd OpenFOAM
 git clone https://github.com/OpenFOAM/OpenFOAM-8.git
 git clone https://github.com/OpenFOAM/ThirdParty-8.git
 
-hpcx_modulepath=/opt/hpcx-v*-x86_64/modulefiles
+hpcx_modulepath=(/opt/hpcx-v*-x86_64/modulefiles)
 
 cat <<EOF >setenv.sh
 source /etc/profile
