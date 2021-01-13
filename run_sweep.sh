@@ -7,6 +7,12 @@ node_list=$4
 ncpus=$5
 nnuma=$6
 
+source $HOME/OpenFOAM/setenv.sh
+
+mydir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+cd $mydir
+
 mesh_id=$(qsub -N "mesh_${name}" -l select=1:ncpus=${ncpus}:mpiprocs=$(( $ncpus / 2 )),place=scatter:excl -- $(pwd)/submit_mesh.sh $name "$size" $nnuma | cut -d'.' -f1)
 
 for ppn in $ppn_list; do

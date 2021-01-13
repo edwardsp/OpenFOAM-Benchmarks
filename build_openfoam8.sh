@@ -25,7 +25,7 @@ source setenv.sh
 
 cd OpenFOAM-8
 
-./Allwmake -j 120 2>&1 | tee build.log
+./Allwmake -j $(nproc) 2>&1 | tee build.log
 
 cd $HOME
 
